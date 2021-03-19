@@ -25,6 +25,12 @@ Linux, I obtained an additional remote from ebay, took it appart, hooked up
 relays to the keys, and used that to control the Carrier wall unit. This
 worked great, but was an embarassing kludge.
 
+![Relay Board Solution](images/photo_2021-03-19_18-52-46.jpg?raw=true)
+
+The remote was a RG52F3/BGEFU1 obtained via ebay ($23), which runs on 3V
+supplied by the SMAKN DC-DC converter ($7 on amazon). The "8 Channel Ethernet
+Relay" board is from Numato Lab ($90). 12V is supplied via a PoE adapter.
+
 ## Using a Raspberry Pi
 
 Fast forward to 2021, and I hooked up a TSOP38238 Infrared Receiver and a
@@ -67,7 +73,9 @@ The first byte defines the remaining fields:
 * 0xa2: a few specialized commands
 * 0xa4: commands specific to the "follow me" function
 
-### 0xa1 byte 1 fields
+### Byte 1
+
+#### 0xa1
 
 * The lower three bits define the mode (i.e., byte1 & 0x07)
   * 0: cool
@@ -85,27 +93,7 @@ The first byte defines the remaining fields:
   * 2: on
   * 3: sleep
 
-### 0xa1 byte 2 fields
-
-The lower 5 bits define the temperature. I'm using a remote set to Fahrenheit
-and an offset of 62 should be added to the value. I.e.,
-~~~
-(byte2 & 0x1f) + 62
-~~~
-The range of temperatures supported by the remote is from 62 to 86
-degrees. When in "fan mode", this value is set to 92 degrees (i.e., 0x1f).
-
-### 0xa1 byte 3
-
-This byte appears to be set to 0xff. This byte is used for the "timer off"
-value, but I did not decode this.
-
-### 0xa1 byte 4
-
-This byte appears to be set to 0xff. This byte is used for the "timer on"
-value, but I did not decode this.
-
-### 0xa2 byte 1 fields
+#### 0xa2
 
 This field describes the command:
 * 0x01: direct
@@ -115,32 +103,58 @@ This field describes the command:
 * 0x0d: toggle self-clean
 * 0x0f: toggle FP (this is a "silent" mode that only works for heat)
 
-### 0xa2 byte 2
+### 0xa4
 
-This byte appears to be set to 0xff.
+This byte appears to be the same as for a 0xa1 command.
 
-### 0xa2 byte 3
+### Byte 2
 
-This byte appears to be set to 0xff.
+#### 0xa1
 
-### 0xa2 byte 4
+The lower 5 bits define the temperature. I'm using a remote set to Fahrenheit
+and an offset of 62 should be added to the value. I.e.,
+~~~
+(byte2 & 0x1f) + 62
+~~~
+The range of temperatures supported by the remote is from 62 to 86
+degrees. When in "fan mode", this value is set to 92 degrees (i.e., 0x1f).
 
-This byte appears to be set to 0xff.
+### 0xa2
 
-### 0xa4 byte 1
+This byte is set to 0xff by default.
+
+### 0xa4
 
 This field appears to be the same as for a 0xa1 command.
 
-### 0xa4 byte 2
+### Byte 3
 
-This field appears to be the same as for a 0xa1 command.
+#### 0xa1
 
-### 0xa4 byte 3
+This byte is set to 0xff by default. Otherwise, it contains the "timer off"
+value.
+
+### 0xa2
+
+This byte is set to 0xff by default.
+
+### 0xa4
 
 * 0xff: followme on
 * 0x3f: followme off
 
-### 0xa4 byte 4
+### Byte 4
+
+### 0xa1
+
+This byte is set to 0xff by default. Otherwise, it contains the "timer on"
+value.
+
+### 0xa2
+
+This byte is set to 0xff by default.
+
+### 0xa4
 
 This byte contains the temperature reported by the remote, less 31.
 
@@ -155,7 +169,7 @@ summed.
 * The result is reversed in LSB/MSB order.
 
 This was difficult to figure out and there are several examples on the
-internet of how this checksum is computed incorrectly.  For discussion, llease
+internet of how this checksum is computed incorrectly.  For discussion, please
 see:
 ~~~
 https://www.eevblog.com/forum/projects/48-bit-(6-byte)-ir-remote-protocol-and-checksum/
