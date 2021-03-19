@@ -37,7 +37,7 @@ dtoverlay=gpio-ir-tx,gpio_pin=18
 
 This worked find with commands such as this:
 ~~~
-ir-ctl -d /dev/lirc1  --receive=tmp.txt
+ir-ctl -d /dev/lirc1 --receive=tmp.txt
 ~~~
 
 ## Protocol Description
@@ -70,20 +70,20 @@ The first byte defines the remaining fields:
 ### 0xa1 byte 1 fields
 
 * The lower three bits define the mode (i.e., byte1 & 0x07)
-** 0: cool
-** 1: dry
-** 2: auto
-** 3: heat
-** 4: fan
+  * 0: cool
+  * 1: dry
+  * 2: auto
+  * 3: heat
+  * 4: fan
 * The next three bits define the fan speed (i.e., (byte1 & 0x38) >> 3)
-** 1: low
-** 2: med
-** 3: high
-** 4: auto
+  * 1: low
+  * 2: med
+  * 3: high
+  * 4: auto
 * The top two bits define the power state (i.e., (byte1 & 0xc0) >> 6)
-** 0: off
-** 2: on
-** 3: sleep
+  * 0: off
+  * 2: on
+  * 3: sleep
 
 ### 0xa1 byte 2 fields
 
