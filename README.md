@@ -16,7 +16,7 @@ Back in 2018, I tried to decode and replay the IR protocol using an IguanAir
 USB adapter. While I made progress on decoding the protocol, I never could
 play it back in a format to which the wall unit would respond. This was made
 more complicated by lircd getting in the way of things, especially the
-determination that a second header needed to be send between the two sets of
+determination that a second header needed to be sent between the two sets of
 codes.  Linux now support /dev/lirc0 without the use of lircd and has tools
 that have a more direct interface with the device, such as ir-ctl.
 
@@ -30,6 +30,22 @@ worked great, but was an embarassing kludge.
 The remote was a RG52F3/BGEFU1 obtained via ebay ($23), which runs on 3V
 supplied by the SMAKN DC-DC converter ($7 on amazon). The "8 Channel Ethernet
 Relay" board is from Numato Lab ($90). 12V is supplied via a PoE adapter.
+
+## The Remote
+
+The remote shown in this photo has had the case removed. Also, the backlight
+was unsoldered, and the IR LED was unsoldered and a 2-pin header was soldered
+in place.
+
+<img src="images/photo_2021-03-19_19-17-46.jpg" width="360">
+
+This is a closeup of the backlight, manufactured by VaOpto as a 2V part with
+model number 1608YEK2AV(MD).
+
+The back of the board shows the jumpers and an SH66P51AF/044FR, which is a
+4-bit micro-controller designed for IR implementations.
+
+<img src="images/photo_2021-03-19_19-35-21.jpg" width="480">
 
 ## Using a Raspberry Pi
 
