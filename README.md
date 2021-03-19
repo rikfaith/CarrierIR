@@ -42,6 +42,8 @@ in place.
 This is a closeup of the backlight, manufactured by VaOpto as a 2V part with
 model number 1608YEK2AV(MD).
 
+<img src="images/photo_2021-03-19_19-18-17.jpg" width="360">
+
 The back of the board shows the jumpers and an SH66P51AF/044FR, which is a
 4-bit micro-controller designed for IR implementations.
 
