@@ -25,7 +25,7 @@ Linux, I obtained an additional remote from ebay, took it appart, hooked up
 relays to the keys, and used that to control the Carrier wall unit. This
 worked great, but was an embarassing kludge.
 
-![Relay Board Solution](images/photo_2021-03-19_18-52-46.jpg?raw=true)
+<img src="images/photo_2021-03-19_18-52-46.jpg?raw=true" width="302">
 
 The remote was a RG52F3/BGEFU1 obtained via ebay ($23), which runs on 3V
 supplied by the SMAKN DC-DC converter ($7 on amazon). The "8 Channel Ethernet
